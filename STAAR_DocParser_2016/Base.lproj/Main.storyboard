@@ -670,13 +670,41 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="STAAR_DocParser_2016" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="102"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <userGuides>
+                            <userLayoutGuide location="177" affinity="minY"/>
+                            <userLayoutGuide location="187" affinity="minY"/>
+                        </userGuides>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PdY-n2-Ikn" userLabel="Input Field">
+                                <rect key="frame" x="20" y="55" width="440" height="27"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="mKB-B1-e9G">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SOk-PK-7Iw" userLabel="DBBrowseBtn">
+                                <rect key="frame" x="351" y="13" width="115" height="32"/>
+                                <buttonCell key="cell" type="push" title="Browse..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dpO-RG-2X5" userLabel="DBBrowseBtn">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vwz-Qp-raZ" userLabel="DBGenBtn">
+                                <rect key="frame" x="14" y="13" width="123" height="32"/>
+                                <buttonCell key="cell" type="push" title="Generate DB" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="o7K-Jx-sl0" userLabel="DBGenBtn">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
                     </view>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="75" y="654.5"/>
         </scene>
     </scenes>
 </document>
