@@ -120,12 +120,34 @@ class ViewController: NSViewController {
                 //Handle Error
             }
         }
+        
+        let readerDB = FMDatabase(path: dbPath)
+        
+        if (readerDB.open()) { //Open and configure database tables.
+            /*
+             Create a table called DICTIONARY with fields as follows:
+             ID, Integer, Primary key, automatically increments.
+             WORD, String, holds a single word.
+             POSX, Integer, holds the location on the screen of the beginning of a word relative to the beginning of its line.
+             LENGTH, Integer, holds the character count of the string stored in WORD.
+             LINE, Integer, holds the line number which the WORD belings to.
+             AUDIOSLOWEST, String, holds the relative URL of the audio file corresponding to WORD which is the slowest rendering.
+             AUDIOSLOW, String, holds the relative URL of the audio file corresponding to WORD which is the slow rendering.
+             AUDIOFAST, String, holds the relative URL of the audio file corresponding to WORD which is the fast rendering.
+             AUDIOFASTEST, String, holds the relative URL of the audio file corresponding to WORD which is the fastest rendering.
+             */
+            let sql_stmt = "CREATE TABLE IF NOT EXISTS DICTIONARY (ID INTEGER PRIMARY KEY AUTOINCREMENT, WORD TEXT, POSX INTEGER, LENGTH INTEGER, HIGHLIGHTED INTEGER, LINE INTEGER, PAGE INTEGER, AUDIOSLOWEST TEXT, AUDIOSLOW TEXT, AUDIOFAST TEXT, AUDIOFASTEST TEXT)"
+            
+            readerDB.executeStatements(sql_stmt) // Pass in the SQL statement.
+
 
     }
     
 
     
 }
+}
+
 
 //--------------------------------------------------------------------------------------------------------------
 //MARK: - Extensions
@@ -142,8 +164,8 @@ extension String {
     
     subscript (r: Range<Int>) -> String {
         return substringWithRange(Range(startIndex.advancedBy(r.startIndex)..<startIndex.advancedBy(r.endIndex)))
-    }
-    
+}
+
 }
 
 

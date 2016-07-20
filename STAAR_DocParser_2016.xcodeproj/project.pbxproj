@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9AA82B291D3FEABB00617248 /* FMDB in Resources */ = {isa = PBXBuildFile; fileRef = 9AA82B281D3FEABB00617248 /* FMDB */; };
+		9AA82B381D3FEE8B00617248 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA82B2E1D3FEE8B00617248 /* FMDatabase.m */; };
+		9AA82B391D3FEE8B00617248 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA82B301D3FEE8B00617248 /* FMDatabaseAdditions.m */; };
+		9AA82B3A1D3FEE8B00617248 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA82B321D3FEE8B00617248 /* FMDatabasePool.m */; };
+		9AA82B3B1D3FEE8B00617248 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA82B341D3FEE8B00617248 /* FMDatabaseQueue.m */; };
+		9AA82B3C1D3FEE8B00617248 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA82B371D3FEE8B00617248 /* FMResultSet.m */; };
 		9ADF212F1D2ED7520070EB92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF212E1D2ED7520070EB92 /* AppDelegate.swift */; };
 		9ADF21311D2ED7520070EB92 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF21301D2ED7520070EB92 /* ViewController.swift */; };
 		9ADF21331D2ED7520070EB92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9ADF21321D2ED7520070EB92 /* Assets.xcassets */; };
@@ -34,8 +38,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9AA82B271D3FE96700617248 /* STAAR_DocParser_2016-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STAAR_DocParser_2016-Bridging-Header.h"; sourceTree = "<group>"; };
-		9AA82B281D3FEABB00617248 /* FMDB */ = {isa = PBXFileReference; lastKnownFileType = folder; path = FMDB; sourceTree = "<group>"; };
+		9AA82B2D1D3FEE8B00617248 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		9AA82B2E1D3FEE8B00617248 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		9AA82B2F1D3FEE8B00617248 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		9AA82B301D3FEE8B00617248 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		9AA82B311D3FEE8B00617248 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		9AA82B321D3FEE8B00617248 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		9AA82B331D3FEE8B00617248 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		9AA82B341D3FEE8B00617248 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		9AA82B351D3FEE8B00617248 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		9AA82B361D3FEE8B00617248 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		9AA82B371D3FEE8B00617248 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		9AA82B3D1D3FF15B00617248 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		9ADF212B1D2ED7520070EB92 /* STAAR_DocParser_2016.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STAAR_DocParser_2016.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ADF212E1D2ED7520070EB92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9ADF21301D2ED7520070EB92 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +89,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9AA82B2C1D3FEE8B00617248 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				9AA82B2D1D3FEE8B00617248 /* FMDatabase.h */,
+				9AA82B2E1D3FEE8B00617248 /* FMDatabase.m */,
+				9AA82B2F1D3FEE8B00617248 /* FMDatabaseAdditions.h */,
+				9AA82B301D3FEE8B00617248 /* FMDatabaseAdditions.m */,
+				9AA82B311D3FEE8B00617248 /* FMDatabasePool.h */,
+				9AA82B321D3FEE8B00617248 /* FMDatabasePool.m */,
+				9AA82B331D3FEE8B00617248 /* FMDatabaseQueue.h */,
+				9AA82B341D3FEE8B00617248 /* FMDatabaseQueue.m */,
+				9AA82B351D3FEE8B00617248 /* FMDB.h */,
+				9AA82B361D3FEE8B00617248 /* FMResultSet.h */,
+				9AA82B371D3FEE8B00617248 /* FMResultSet.m */,
+			);
+			path = FMDB;
+			sourceTree = "<group>";
+		};
 		9ADF21221D2ED7520070EB92 = {
 			isa = PBXGroup;
 			children = (
@@ -98,13 +130,13 @@
 		9ADF212D1D2ED7520070EB92 /* STAAR_DocParser_2016 */ = {
 			isa = PBXGroup;
 			children = (
-				9AA82B281D3FEABB00617248 /* FMDB */,
+				9AA82B2C1D3FEE8B00617248 /* FMDB */,
 				9ADF212E1D2ED7520070EB92 /* AppDelegate.swift */,
 				9ADF21301D2ED7520070EB92 /* ViewController.swift */,
 				9ADF21321D2ED7520070EB92 /* Assets.xcassets */,
 				9ADF21341D2ED7520070EB92 /* Main.storyboard */,
 				9ADF21371D2ED7520070EB92 /* Info.plist */,
-				9AA82B271D3FE96700617248 /* STAAR_DocParser_2016-Bridging-Header.h */,
+				9AA82B3D1D3FF15B00617248 /* Bridging-Header.h */,
 			);
 			path = STAAR_DocParser_2016;
 			sourceTree = "<group>";
@@ -232,7 +264,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9ADF21331D2ED7520070EB92 /* Assets.xcassets in Resources */,
-				9AA82B291D3FEABB00617248 /* FMDB in Resources */,
 				9ADF21361D2ED7520070EB92 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,8 +289,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AA82B381D3FEE8B00617248 /* FMDatabase.m in Sources */,
 				9ADF21311D2ED7520070EB92 /* ViewController.swift in Sources */,
+				9AA82B3C1D3FEE8B00617248 /* FMResultSet.m in Sources */,
+				9AA82B3A1D3FEE8B00617248 /* FMDatabasePool.m in Sources */,
 				9ADF212F1D2ED7520070EB92 /* AppDelegate.swift in Sources */,
+				9AA82B391D3FEE8B00617248 /* FMDatabaseAdditions.m in Sources */,
+				9AA82B3B1D3FEE8B00617248 /* FMDatabaseQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,7 +437,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "TEILAB.STAAR-DocParser-2016";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "STAAR_DocParser_2016-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/STAAR_Docparser_2016/Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -418,7 +454,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "TEILAB.STAAR-DocParser-2016";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "STAAR_DocParser_2016-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/STAAR_Docparser_2016/Bridging-Header.h";
 			};
 			name = Release;
 		};
