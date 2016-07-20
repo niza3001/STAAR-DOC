@@ -33,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9AA82B271D3FE96700617248 /* STAAR_DocParser_2016-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STAAR_DocParser_2016-Bridging-Header.h"; sourceTree = "<group>"; };
 		9ADF212B1D2ED7520070EB92 /* STAAR_DocParser_2016.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STAAR_DocParser_2016.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ADF212E1D2ED7520070EB92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9ADF21301D2ED7520070EB92 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 				9ADF21321D2ED7520070EB92 /* Assets.xcassets */,
 				9ADF21341D2ED7520070EB92 /* Main.storyboard */,
 				9ADF21371D2ED7520070EB92 /* Info.plist */,
+				9AA82B271D3FE96700617248 /* STAAR_DocParser_2016-Bridging-Header.h */,
 			);
 			path = STAAR_DocParser_2016;
 			sourceTree = "<group>";
@@ -389,8 +391,13 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = STAAR_DocParser_2016/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/STAAR_DocParser_2016",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "TEILAB.STAAR-DocParser-2016";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "STAAR_DocParser_2016-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -401,8 +408,13 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = STAAR_DocParser_2016/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/STAAR_DocParser_2016",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "TEILAB.STAAR-DocParser-2016";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "STAAR_DocParser_2016-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -413,6 +425,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = STAAR_DocParser_2016Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/STAAR_DocParser_2016",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "TEILAB.STAAR-DocParser-2016Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/STAAR_DocParser_2016.app/Contents/MacOS/STAAR_DocParser_2016";
@@ -426,6 +442,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = STAAR_DocParser_2016Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/STAAR_DocParser_2016",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "TEILAB.STAAR-DocParser-2016Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/STAAR_DocParser_2016.app/Contents/MacOS/STAAR_DocParser_2016";
@@ -438,6 +458,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = STAAR_DocParser_2016UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/STAAR_DocParser_2016",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "TEILAB.STAAR-DocParser-2016UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = STAAR_DocParser_2016;
@@ -450,6 +474,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = STAAR_DocParser_2016UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/STAAR_DocParser_2016",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "TEILAB.STAAR-DocParser-2016UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = STAAR_DocParser_2016;
@@ -475,6 +503,7 @@
 				9ADF21521D2ED7530070EB92 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9ADF21531D2ED7530070EB92 /* Build configuration list for PBXNativeTarget "STAAR_DocParser_2016Tests" */ = {
 			isa = XCConfigurationList;
@@ -483,6 +512,7 @@
 				9ADF21551D2ED7530070EB92 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9ADF21561D2ED7530070EB92 /* Build configuration list for PBXNativeTarget "STAAR_DocParser_2016UITests" */ = {
 			isa = XCConfigurationList;
@@ -491,6 +521,7 @@
 				9ADF21581D2ED7530070EB92 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
