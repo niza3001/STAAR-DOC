@@ -17,6 +17,7 @@ class ViewController: NSViewController {
     let mySynth: NSSpeechSynthesizer = NSSpeechSynthesizer(voice: NSSpeechSynthesizer.defaultVoice())!
     let dirs : [String] = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as [String])
     var documentURL: NSURL?
+    var PDFAnalyzer: STAAR_PDFAnalyzerClass!
 
     
     //--------------------------------------------------------------------------------------------------------------
@@ -45,6 +46,11 @@ class ViewController: NSViewController {
         // Display the dialog.
         if (openDialog.runModal() == NSModalResponseOK) {
             documentURL = openDialog.URL! //Get the selected document URL
+            let urlString: String = documentURL!.absoluteString //convert NSURL to string
+            let modifiedURL = CFURLCreateWithFileSystemPath(kCFAllocatorSystemDefault, urlString, CFURLPathStyle.CFURLPOSIXPathStyle, false) //convert string to CFURL
+            PDFAnalyzer.createDoc(modifiedURL)
+            
+
             var documentName = openDialog.URL!.lastPathComponent! //Get the selected document
             documentName = documentName[0...documentName.characters.count-5] //Remove the file extension (3 char extensions ONLY)
             inputField.stringValue = documentName //Set the input field to the filename
@@ -137,17 +143,14 @@ class ViewController: NSViewController {
              AUDIOSLOW, String, holds the relative URL of the audio file corresponding to WORD which is the slow rendering.
              AUDIOFAST, String, holds the relative URL of the audio file corresponding to WORD which is the fast rendering.
              AUDIOFASTEST, String, holds the relative URL of the audio file corresponding to WORD which is the fastest rendering.
+             TO ADD: length of each audio file
              */
             let sql_stmt = "CREATE TABLE IF NOT EXISTS DICTIONARY (ID INTEGER PRIMARY KEY AUTOINCREMENT, WORD TEXT, POSX REAL, POSY REAL, LENGTH REAL, LINE INTEGER, PAGE INTEGER, AUDIOSLOWEST TEXT, AUDIOSLOW TEXT, AUDIOFAST TEXT, AUDIOFASTEST TEXT)"
             
             readerDB.executeStatements(sql_stmt) // Pass in the SQL statement.
 
-
+        }
     }
-    
-
-    
-}
 }
 
 

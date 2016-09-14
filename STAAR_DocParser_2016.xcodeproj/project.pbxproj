@@ -14,6 +14,7 @@
 		9AA82B3C1D3FEE8B00617248 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA82B371D3FEE8B00617248 /* FMResultSet.m */; };
 		9AA82B441D404C6C00617248 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA82B431D404C6C00617248 /* libsqlite3.dylib */; };
 		9AA82B451D404C7C00617248 /* libsqlite3.dylib in Sources */ = {isa = PBXBuildFile; fileRef = 9AA82B431D404C6C00617248 /* libsqlite3.dylib */; };
+		9AA82B471D40507300617248 /* PDFAnalyzerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA82B461D40507300617248 /* PDFAnalyzerClass.swift */; };
 		9ADF212F1D2ED7520070EB92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF212E1D2ED7520070EB92 /* AppDelegate.swift */; };
 		9ADF21311D2ED7520070EB92 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADF21301D2ED7520070EB92 /* ViewController.swift */; };
 		9ADF21331D2ED7520070EB92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9ADF21321D2ED7520070EB92 /* Assets.xcassets */; };
@@ -53,6 +54,7 @@
 		9AA82B371D3FEE8B00617248 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		9AA82B3D1D3FF15B00617248 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		9AA82B431D404C6C00617248 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libsqlite3.dylib; sourceTree = "<group>"; };
+		9AA82B461D40507300617248 /* PDFAnalyzerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFAnalyzerClass.swift; sourceTree = "<group>"; };
 		9ADF212B1D2ED7520070EB92 /* STAAR_DocParser_2016.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STAAR_DocParser_2016.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ADF212E1D2ED7520070EB92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9ADF21301D2ED7520070EB92 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				9AA82B2C1D3FEE8B00617248 /* FMDB */,
 				9ADF212E1D2ED7520070EB92 /* AppDelegate.swift */,
 				9ADF21301D2ED7520070EB92 /* ViewController.swift */,
+				9AA82B461D40507300617248 /* PDFAnalyzerClass.swift */,
 				9ADF21321D2ED7520070EB92 /* Assets.xcassets */,
 				9ADF21341D2ED7520070EB92 /* Main.storyboard */,
 				9ADF21371D2ED7520070EB92 /* Info.plist */,
@@ -301,6 +304,7 @@
 				9AA82B3A1D3FEE8B00617248 /* FMDatabasePool.m in Sources */,
 				9ADF212F1D2ED7520070EB92 /* AppDelegate.swift in Sources */,
 				9AA82B391D3FEE8B00617248 /* FMDatabaseAdditions.m in Sources */,
+				9AA82B471D40507300617248 /* PDFAnalyzerClass.swift in Sources */,
 				9AA82B3B1D3FEE8B00617248 /* FMDatabaseQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
