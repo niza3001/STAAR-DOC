@@ -13,3 +13,4 @@
 #endif /* Bridging_Header_h */
 
 #import "FMDB.h"
+#import "Scanner2.h"
