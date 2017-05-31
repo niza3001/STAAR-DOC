@@ -114,10 +114,17 @@ class STAAR_PDFPageClass {
         
         for object in myPageWordsDetails.mySelections{
             let rect: CGRect = (object as AnyObject).frame.applying((object as AnyObject).transform)
+            //debugPrint(rect.origin)
             let x = rect.origin.x*(1.176 as CGFloat) + 1.041
             let y = rect.origin.y*(-1.174 as CGFloat) + 942.7
             let w = rect.width * 1.176
             let h = rect.height * 1.174
+            
+//            let x = rect.origin.x*(1.593  as CGFloat) + 0.133
+//            let y = rect.origin.y*(-1.594 as CGFloat) + 1288
+//            let w = rect.width * 1.593
+//            let h = rect.height * 1.594
+
             
             let transformedRect = CGRect(x: x,y: y,width: w,height: h)
             transformedRects.append(transformedRect)
@@ -149,6 +156,20 @@ class STAAR_PDFPageClass {
                 myPageWordsDetails.wordBBoxArray.append(tempRect)
             }
         }
+        
+//        debugPrint(myPageWordsDetails.wordBBoxArray[20])
+//        debugPrint(myPageWordsDetails.wordBBoxArray[99])
+//        debugPrint(myPageWordsDetails.wordBBoxArray[105])
+//        debugPrint(myPageWordsDetails.wordBBoxArray[106])
+//        debugPrint(myPageWordsDetails.wordBBoxArray[183])
+//        debugPrint(myPageWordsDetails.wordBBoxArray[202])
+//        debugPrint(myPageWordsDetails.wordBBoxArray[240])
+//        debugPrint(myPageWordsDetails.wordBBoxArray[281])
+//        debugPrint(myPageWordsDetails.wordBBoxArray[302])
+//        debugPrint(myPageWordsDetails.wordBBoxArray[380])
+//        debugPrint(myPageWordsDetails.wordBBoxArray[436])
+//        debugPrint(myPageWordsDetails.wordBBoxArray[445])
+//        debugPrint(myPageWordsDetails.wordBBoxArray[448])
     }
 }
 
@@ -161,6 +182,7 @@ class STAAR_PDFDocClass {
     let PDFdoc: CGPDFDocument!
     var PDFPages: [STAAR_PDFPageClass] = []
     var PDFPath: URL
+    var NewWordsArray: [String] = []
     
     
     //MARK: Initialization
@@ -175,8 +197,9 @@ class STAAR_PDFDocClass {
             var line = STAAR_Lineclass()
             line.lineYvalue = page.myPageWordsDetails.wordBBoxArray[0].origin.y - page.myPageWordsDetails.wordBBoxArray[0].height/2
             var counter = 0
+            debugPrint(page.myPageWordsDetails.wordBBoxArray.count)
             for wordBBox in page.myPageWordsDetails.wordBBoxArray{
-                if line.lineYvalue == wordBBox.origin.y - wordBBox.height/2 {
+                if line.lineYvalue == wordBBox.origin.y + wordBBox.height/2 {
                     let str = page.myPageWordsDetails.words[counter]
                     //print(str)
                     let start = CGPoint(x: wordBBox.origin.x, y: line.lineYvalue)
@@ -190,7 +213,7 @@ class STAAR_PDFDocClass {
                     line = STAAR_Lineclass()
                     line.lineNum = nextLine
                     let str = page.myPageWordsDetails.words[counter]
-                    line.lineYvalue = wordBBox.origin.y - wordBBox.height/2
+                    line.lineYvalue = wordBBox.origin.y + wordBBox.height/2
                     let start = CGPoint(x: wordBBox.origin.x, y: line.lineYvalue)
                     let end = CGPoint(x: wordBBox.origin.x+wordBBox.width, y: line.lineYvalue)
                     let word = STAAR_Wordclass(str: str, bbox: wordBBox,startpoint: start,endpoint: end)
@@ -203,41 +226,54 @@ class STAAR_PDFDocClass {
         }
     }
     
-    
-//    func lineCounter(wordStarts : [CGPoint], i: Int) -> Int{
-//        
-//        if i == 0 {
-//            l = 1
-//        }
-//        else if (wordStarts[i].y == wordStarts[i-1].y){
-//            //Do Nothing
-//        }
-//        else {
-//            l = l+1
-//        }
-//        return l
-//    }
-    
     func writeDataToFile(ParentDir:String, documentName: String) -> Bool
     {
         // check our data exists
         var wordsArray = self.PDFPages[0].myPageWordsDetails.words
+        
         var newWordsArray: [String] = []
         for word in wordsArray{
+            if word == "" || word.asciiArray == [] {
+                wordsArray.remove(at: wordsArray.index(of: word)!)
+                continue
+            }
             var newWord = word.removingCharacters(forbiddenCharacters: CharacterSet.alphanumerics.inverted)
             newWordsArray.append(newWord)
         }
+        
+        self.NewWordsArray = newWordsArray
+        //debugPrint(newWordsArray.count)
+        //debugPrint(newWordsArray.last)
+//        debugPrint(newWordsArray[20])
+//        debugPrint(newWordsArray[99])
+//        debugPrint(newWordsArray[105])
+//        debugPrint(newWordsArray[106])
+//        debugPrint(newWordsArray[183])
+//        debugPrint(newWordsArray[202])
+//        debugPrint(newWordsArray[240])
+//        debugPrint(newWordsArray[281])
+//        debugPrint(newWordsArray[302])
+//        debugPrint(newWordsArray[380])
+//        debugPrint(newWordsArray[436])
+//        debugPrint(newWordsArray[445])
+//        debugPrint(newWordsArray[448])
         var wordStarts : [CGPoint] = []
         var wordEnds : [CGPoint] = []
+        var check = 0
+        //debugPrint("number of lines in this page \(self.PDFPages[0].pageLines.count)")
         for line in self.PDFPages[0].pageLines{
+            check += 1
+            //debugPrint("number of words in line \(check) is \(line.lineWords.count)")
             for word in line.lineWords{
                 wordStarts.append(word.wordSegment.startPoint)
                 wordEnds.append(word.wordSegment.endPoint)
+                //debugPrint("check is \(check)")
             }
         }
+        
 //        print("Validation")
 //        debugPrint(wordsArray.count)
-//        debugPrint(wordStarts.count)
+//        debugPrint(wordStarts.last)
 //        debugPrint(wordEnds.count)
 //        debugPrint(wordsArray[18])
         var CSVText = "ID,WORD,POSWX,POSLY,LENGTH,LINE,PAGE,DURATION,AUDIOSLOW,AUDIONORMAL,AUDIOFAST\n"
@@ -247,9 +283,14 @@ class STAAR_PDFDocClass {
         let fastDir = mainDir + "AudioFast/"
         let durationPath = Bundle.main.path(forResource: "NormalDurations", ofType: "txt")! as String
         let content = try! String(contentsOfFile: durationPath, encoding: String.Encoding.utf8).components(separatedBy: "\n")
-        debugPrint(content.last)
-        for i in 0...340 {
-            CSVText.append("\(i+1),\(newWordsArray[i]),\(wordStarts[i].x),\(wordStarts[i].y),\(wordEnds[i].x-wordStarts[i].x),0,1,\(content[i]),\(slowDir + "\(i+1).aiff"),\(normalDir + "\(i+1).aiff"),\(fastDir + "\(i+1).aiff")\n")
+        //debugPrint(content.last)
+        //debugPrint("starts")
+        //debugPrint(wordStarts.count)
+        //debugPrint("ends")
+        //debugPrint(wordEnds.count)
+        for i in 0...(newWordsArray.count-2) {
+            CSVText.append("\(i+1),\(newWordsArray[i]),\(wordStarts[i].x),\(wordStarts[i].y),\(wordEnds[i].x-wordStarts[i].x),0,1,000,\(slowDir + "\(i+1).aiff"),\(normalDir + "\(i+1).aiff"),\(fastDir + "\(i+1).aiff")\n")
+            //debugPrint(i)
         }
         
         do{
