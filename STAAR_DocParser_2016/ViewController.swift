@@ -85,7 +85,7 @@ class ViewController: NSViewController {
         
         
         //Create some new folders
-        let parentDir = "/Users/NiloofarZarei/Desktop/" + "\(documentName)_STAAR_3/" //The parent directory should be named after the parsed document
+        let parentDir = "/Users/NiloofarZarei/Desktop/" + "\(documentName)_STAARFormat/" //The parent directory should be named after the parsed document
         
         if (fileManager.fileExists(atPath: parentDir)) { //If the parent directory already exists, delete the existing one.
             do {
@@ -108,7 +108,7 @@ class ViewController: NSViewController {
 //        } catch let error as NSError {
 //            print("Failed to create dir: \(error.localizedDescription)") //Catch an error of the directory is not created properly
 //        }
-        let normalDir = parentDir + "AudioNormal/" //The audio files should be stored in a folder for grouping
+        let normalDir = parentDir + "AudioFiles/" //The audio files should be stored in a folder for grouping
         do {
             try fileManager.createDirectory(atPath: normalDir, withIntermediateDirectories: true, attributes: nil)
         } catch let error as NSError {
@@ -122,43 +122,44 @@ class ViewController: NSViewController {
 //        }
         
     
-        //Create the SQLite database file
-        let dbPath = parentDir + "\(documentName)_STAAR.db" //Set the path to the file location
+//        //Create the SQLite database file
+//        let dbPath = parentDir + "\(documentName)_STAAR.db" //Set the path to the file location
+//        
+//        if (fileManager.fileExists(atPath: dbPath)) { //If the database exists, delete the existing database.
+//            do {
+//                try fileManager.removeItem(atPath: dbPath)
+//            } catch _ as NSError {
+//                //Handle Error -  this should alert the user to select another file
+//            }
+//        }
+//        
+//        let readerDB = FMDatabase(path: dbPath)
+//        
+//        if (readerDB?.open())! { //Open and configure database tables.
+//            /*
+//             Create a table called DICTIONARY with fields as follows:
+//             ID, Integer, Primary key, automatically increments.
+//             WORD, String, holds a single word.
+//             POSX, Real, holds the X location on the screen of the beginning of a word.
+//             POSY, Real, holds the Y location on the screen of the beginning of a word.
+//             LENGTH, Real, holds the length  of the WORD.
+//             LINE, Integer, holds the line number which the WORD belongs to.
+//             PAGE, Integer, holds the page number which the WORD belongs to.
+//             AUDIOSLOW, String, holds the relative URL of the audio file corresponding to WORD which is the slow rendering.
+//             AUDIONORMAL, String, holds the relative URL of the audio file corresponding to WORD which is the normal rendering.
+//             AUDIOFAST, String, holds the relative URL of the audio file corresponding to WORD which is the fast rendering.
+//             TO ADD: length of each audio file
+//             */
+//            let sql_stmt = "CREATE TABLE IF NOT EXISTS DICTIONARY (ID INTEGER PRIMARY KEY AUTOINCREMENT, WORD TEXT, POSWX REAL, POSLY REAL, LENGTH REAL, LINE INTEGER, PAGE INTEGER, AUDIOSLOW TEXT, AUDIONORMAL TEXT, AUDIOFAST TEXT)"
+//            
+//            readerDB?.executeStatements(sql_stmt) // Pass in the SQL statement.
         
-        if (fileManager.fileExists(atPath: dbPath)) { //If the database exists, delete the existing database.
-            do {
-                try fileManager.removeItem(atPath: dbPath)
-            } catch _ as NSError {
-                //Handle Error -  this should alert the user to select another file
-            }
-        }
-        
-        let readerDB = FMDatabase(path: dbPath)
-        
-        if (readerDB?.open())! { //Open and configure database tables.
-            /*
-             Create a table called DICTIONARY with fields as follows:
-             ID, Integer, Primary key, automatically increments.
-             WORD, String, holds a single word.
-             POSX, Real, holds the X location on the screen of the beginning of a word.
-             POSY, Real, holds the Y location on the screen of the beginning of a word.
-             LENGTH, Real, holds the length  of the WORD.
-             LINE, Integer, holds the line number which the WORD belongs to.
-             PAGE, Integer, holds the page number which the WORD belongs to.
-             AUDIOSLOW, String, holds the relative URL of the audio file corresponding to WORD which is the slow rendering.
-             AUDIONORMAL, String, holds the relative URL of the audio file corresponding to WORD which is the normal rendering.
-             AUDIOFAST, String, holds the relative URL of the audio file corresponding to WORD which is the fast rendering.
-             TO ADD: length of each audio file
-             */
-            let sql_stmt = "CREATE TABLE IF NOT EXISTS DICTIONARY (ID INTEGER PRIMARY KEY AUTOINCREMENT, WORD TEXT, POSWX REAL, POSLY REAL, LENGTH REAL, LINE INTEGER, PAGE INTEGER, AUDIOSLOW TEXT, AUDIONORMAL TEXT, AUDIOFAST TEXT)"
-            
-            readerDB?.executeStatements(sql_stmt) // Pass in the SQL statement.
-            
             let doc = STAAR_PDFDocClass(thisPath: documentURL)
             doc.writeDataToFile(ParentDir: parentDir, documentName: "\(documentName)")
             
             //var insertSQL = "temp"
             var wordNum = 1
+            var pageNum = 1
             //var result = true
             
             let seconds = 0.25 // An Quarter of a Second delay
@@ -167,25 +168,24 @@ class ViewController: NSViewController {
             
             //Add delay between words, then split with SOX.
             let silence = "[[slnc 1000]]" //TTS will wait 1000 ms (1s) before speaking the next word w/o sacrificing coarticulation.
-            
             var audioPath = parentDir + "test.aiff"
             var audioURL: URL = URL(fileURLWithPath: audioPath)
-            mySynth.startSpeaking("A \(silence) humongous \(silence) elephant, Joe, ate a red apple happily.", to: audioURL)
-            
-            audioPath = normalDir + "449.aiff"
-            audioURL = URL(fileURLWithPath: audioPath)
-            debugPrint(audioPath)
-            debugPrint(audioURL)
-            mySynth.rate = 220.0
-            let aWord = "yards"
-            mySynth.startSpeaking(aWord, to: audioURL)
-            debugPrint(doc.NewWordsArray[8])
-            
+//            mySynth.startSpeaking("A \(silence) humongous \(silence) elephant, Joe, ate a red apple happily.", to: audioURL)
+        
+//            audioPath = normalDir + "449.aiff"
+//            audioURL = URL(fileURLWithPath: audioPath)
+//            debugPrint(audioPath)
+//            debugPrint(audioURL)
+//            mySynth.rate = 220.0
+//            let aWord = "yards"
+//            mySynth.startSpeaking(aWord, to: audioURL)
+//            debugPrint(doc.NewWordsArray[8])
+        
             //var wordcounter = 0
             for page in doc.PDFPages {
                 for line in page.pageLines {
                     for word in line.lineWords {
-                            audioPath = normalDir + "\(wordNum).aiff"
+                            audioPath = normalDir + "\(pageNum)_\(wordNum).aiff"
                             audioURL = URL(fileURLWithPath: audioPath)
                             self.mySynth.rate = 220.0
                             var bool = self.mySynth.startSpeaking(word.wordString, to: audioURL)
@@ -194,22 +194,24 @@ class ViewController: NSViewController {
                             }
                 }
                 }
+                wordNum = 1
+                pageNum += 1
             }
             
-            audioPath = normalDir + "446.aiff"
-            audioURL = URL(fileURLWithPath: audioPath)
-            self.mySynth.rate = 220.0
-            self.mySynth.startSpeaking("fifty", to: audioURL)
-            
-            audioPath = normalDir + "447.aiff"
-            audioURL = URL(fileURLWithPath: audioPath)
-            self.mySynth.rate = 220.0
-            self.mySynth.startSpeaking("or", to: audioURL)
-            
-            audioPath = normalDir + "448.aiff"
-            audioURL = URL(fileURLWithPath: audioPath)
-            self.mySynth.rate = 220.0
-            self.mySynth.startSpeaking("sixty", to: audioURL)
+//            audioPath = normalDir + "446.aiff"
+//            audioURL = URL(fileURLWithPath: audioPath)
+//            self.mySynth.rate = 220.0
+//            self.mySynth.startSpeaking("fifty", to: audioURL)
+//            
+//            audioPath = normalDir + "447.aiff"
+//            audioURL = URL(fileURLWithPath: audioPath)
+//            self.mySynth.rate = 220.0
+//            self.mySynth.startSpeaking("or", to: audioURL)
+//            
+//            audioPath = normalDir + "448.aiff"
+//            audioURL = URL(fileURLWithPath: audioPath)
+//            self.mySynth.rate = 220.0
+//            self.mySynth.startSpeaking("sixty", to: audioURL)
 
 
             
@@ -227,8 +229,8 @@ class ViewController: NSViewController {
 //            wordNum += 1
 //            }
             
-        readerDB?.close() //Finished with the database.
-        }
+//        readerDB?.close() //Finished with the database.
+//        }
         NSApplication.shared().mainWindow?.endSheet(alert.window)
 }
 }
