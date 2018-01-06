@@ -28,7 +28,6 @@
 		9A3F2DA51E1205B400442528 /* Type0Font.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3F2D8E1E1205B400442528 /* Type0Font.m */; };
 		9A3F2DA61E1205B400442528 /* Type1Font.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3F2D901E1205B400442528 /* Type1Font.m */; };
 		9A3F2DA71E1205B400442528 /* Type3Font.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3F2D921E1205B400442528 /* Type3Font.m */; };
-		9A6E2E7F1E50652A00D41BFE /* NormalDurations.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9A6E2E7E1E50652A00D41BFE /* NormalDurations.txt */; };
 		9A75ADA91E01C14600E11DE4 /* CS.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9A75ADA81E01C14600E11DE4 /* CS.pdf */; };
 		9AA82B381D3FEE8B00617248 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA82B2E1D3FEE8B00617248 /* FMDatabase.m */; };
 		9AA82B391D3FEE8B00617248 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA82B301D3FEE8B00617248 /* FMDatabaseAdditions.m */; };
@@ -106,7 +105,6 @@
 		9A3F2D901E1205B400442528 /* Type1Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Type1Font.m; sourceTree = "<group>"; };
 		9A3F2D911E1205B400442528 /* Type3Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Type3Font.h; sourceTree = "<group>"; };
 		9A3F2D921E1205B400442528 /* Type3Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Type3Font.m; sourceTree = "<group>"; };
-		9A6E2E7E1E50652A00D41BFE /* NormalDurations.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = NormalDurations.txt; path = ../../STAAR_2016/STAAR_2016/NormalDurations.txt; sourceTree = "<group>"; };
 		9A75ADA81E01C14600E11DE4 /* CS.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = CS.pdf; sourceTree = SOURCE_ROOT; };
 		9AA82B2D1D3FEE8B00617248 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		9AA82B2E1D3FEE8B00617248 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
@@ -252,7 +250,6 @@
 		9ADF212D1D2ED7520070EB92 /* STAAR_DocParser_2016 */ = {
 			isa = PBXGroup;
 			children = (
-				9A6E2E7E1E50652A00D41BFE /* NormalDurations.txt */,
 				9A75ADA81E01C14600E11DE4 /* CS.pdf */,
 				9ADF212E1D2ED7520070EB92 /* AppDelegate.swift */,
 				9ADF21301D2ED7520070EB92 /* ViewController.swift */,
@@ -396,7 +393,6 @@
 				9A75ADA91E01C14600E11DE4 /* CS.pdf in Resources */,
 				9ADF21331D2ED7520070EB92 /* Assets.xcassets in Resources */,
 				9ADF21361D2ED7520070EB92 /* Main.storyboard in Resources */,
-				9A6E2E7F1E50652A00D41BFE /* NormalDurations.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,6 +20,9 @@ class ViewController: NSViewController {
     let dirs : [String] = (NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true) as [String])
     var documentURL: URL?
     public var newWordsArray: [String] = []
+    var durationsArray: [String] = []
+    var addrArray: [String] = []
+    let deviceModels = ["12.9 inch iPad Pro", "9.7 inch iPad"]
 
     
     //--------------------------------------------------------------------------------------------------------------
@@ -28,12 +31,13 @@ class ViewController: NSViewController {
     @IBOutlet weak var inputField: NSTextField!
     @IBAction func generateDBPressed(_ sender: AnyObject) {
         if (!inputField.stringValue.isEmpty) {
-            processDocument(documentURL!, documentName: inputField.stringValue)
+            processDocument(documentURL!, documentName: inputField.stringValue, deviceModel: deviceModelSelector.indexOfSelectedItem)
         }
 
     }
 
     @IBAction func browsePressed(_ sender: AnyObject) {
+        debugPrint(NSSpeechSynthesizer.availableVoices())
         //Create the File Open Dialog class.
         debugPrint("browse pressed")
         let openDialog = NSOpenPanel()
@@ -59,11 +63,23 @@ class ViewController: NSViewController {
         self.newWordsArray = array
     }
     
+    
+    @IBOutlet weak var deviceModelSelector: NSPopUpButton!
+    
+    
     //--------------------------------------------------------------------------------------------------------------
     //MARK: - Functions
     //--------------------------------------------------------------------------------------------------------------
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        deviceModelSelector.removeAllItems()
+        deviceModelSelector.addItems(withTitles: deviceModels)
+        deviceModelSelector.selectItem(at: 0)
+        deviceModelSelector.autoenablesItems = false
+    }
+    
     // This is the function called when "Generate DB" button is pressed.
-    func processDocument(_ documentURL: URL, documentName: String) {
+    func processDocument(_ documentURL: URL, documentName: String, deviceModel: Int) {
         
         let alert = NSAlert()
         alert.messageText = "Please Wait..."
@@ -83,10 +99,13 @@ class ViewController: NSViewController {
         let documentsDir = dirs[0]
         print(documentsDir)
         
+        var devSize = "12.9"
+        if deviceModel == 1 {devSize = "9.7"}
+        
         
         //Create some new folders
         let parentDir = "/Users/NiloofarZarei/Desktop/" + "\(documentName)_STAARFormat/" //The parent directory should be named after the parsed document
-        
+//let parentDir2 = "/Users/NiloofarZarei/Desktop/"
         if (fileManager.fileExists(atPath: parentDir)) { //If the parent directory already exists, delete the existing one.
             do {
                 try fileManager.removeItem(atPath: parentDir)
@@ -101,61 +120,16 @@ class ViewController: NSViewController {
             print("Failed to create dir: \(error.localizedDescription)") //Catch an error of the directory is not created properly
         }
         
-        //Create directories for the audio files.
-//        let slowDir = parentDir + "AudioSlow/" //The audio files should be stored in a folder for grouping
-//        do {
-//            try fileManager.createDirectory(atPath: slowDir, withIntermediateDirectories: true, attributes: nil)
-//        } catch let error as NSError {
-//            print("Failed to create dir: \(error.localizedDescription)") //Catch an error of the directory is not created properly
-//        }
+  
         let normalDir = parentDir + "AudioFiles/" //The audio files should be stored in a folder for grouping
         do {
             try fileManager.createDirectory(atPath: normalDir, withIntermediateDirectories: true, attributes: nil)
         } catch let error as NSError {
             print("Failed to create dir: \(error.localizedDescription)") //Catch an error of the directory is not created properly
         }
-//        let fastDir = parentDir + "AudioFast/" //The audio files should be stored in a folder for grouping
-//        do {
-//            try fileManager.createDirectory(atPath: fastDir, withIntermediateDirectories: true, attributes: nil)
-//        } catch let error as NSError {
-//            print("Failed to create dir: \(error.localizedDescription)") //Catch an error of the directory is not created properly
-//        }
-        
-    
-//        //Create the SQLite database file
-//        let dbPath = parentDir + "\(documentName)_STAAR.db" //Set the path to the file location
-//        
-//        if (fileManager.fileExists(atPath: dbPath)) { //If the database exists, delete the existing database.
-//            do {
-//                try fileManager.removeItem(atPath: dbPath)
-//            } catch _ as NSError {
-//                //Handle Error -  this should alert the user to select another file
-//            }
-//        }
-//        
-//        let readerDB = FMDatabase(path: dbPath)
-//        
-//        if (readerDB?.open())! { //Open and configure database tables.
-//            /*
-//             Create a table called DICTIONARY with fields as follows:
-//             ID, Integer, Primary key, automatically increments.
-//             WORD, String, holds a single word.
-//             POSX, Real, holds the X location on the screen of the beginning of a word.
-//             POSY, Real, holds the Y location on the screen of the beginning of a word.
-//             LENGTH, Real, holds the length  of the WORD.
-//             LINE, Integer, holds the line number which the WORD belongs to.
-//             PAGE, Integer, holds the page number which the WORD belongs to.
-//             AUDIOSLOW, String, holds the relative URL of the audio file corresponding to WORD which is the slow rendering.
-//             AUDIONORMAL, String, holds the relative URL of the audio file corresponding to WORD which is the normal rendering.
-//             AUDIOFAST, String, holds the relative URL of the audio file corresponding to WORD which is the fast rendering.
-//             TO ADD: length of each audio file
-//             */
-//            let sql_stmt = "CREATE TABLE IF NOT EXISTS DICTIONARY (ID INTEGER PRIMARY KEY AUTOINCREMENT, WORD TEXT, POSWX REAL, POSLY REAL, LENGTH REAL, LINE INTEGER, PAGE INTEGER, AUDIOSLOW TEXT, AUDIONORMAL TEXT, AUDIOFAST TEXT)"
-//            
-//            readerDB?.executeStatements(sql_stmt) // Pass in the SQL statement.
-        
-            let doc = STAAR_PDFDocClass(thisPath: documentURL)
-            doc.writeDataToFile(ParentDir: parentDir, documentName: "\(documentName)")
+
+        let doc = STAAR_PDFDocClass(thisPath: documentURL, size: devSize)
+            //doc.writeDataToFile(ParentDir: parentDir, documentName: "\(documentName)", durationArray: self.durationsArray, addrArray: self.addrArray)
             
             //var insertSQL = "temp"
             var wordNum = 1
@@ -170,26 +144,21 @@ class ViewController: NSViewController {
             let silence = "[[slnc 1000]]" //TTS will wait 1000 ms (1s) before speaking the next word w/o sacrificing coarticulation.
             var audioPath = parentDir + "test.aiff"
             var audioURL: URL = URL(fileURLWithPath: audioPath)
-//            mySynth.startSpeaking("A \(silence) humongous \(silence) elephant, Joe, ate a red apple happily.", to: audioURL)
-        
-//            audioPath = normalDir + "449.aiff"
-//            audioURL = URL(fileURLWithPath: audioPath)
-//            debugPrint(audioPath)
-//            debugPrint(audioURL)
-//            mySynth.rate = 220.0
-//            let aWord = "yards"
-//            mySynth.startSpeaking(aWord, to: audioURL)
-//            debugPrint(doc.NewWordsArray[8])
-        
-            //var wordcounter = 0
+            //var textTest = "A \(silence) humongous \(silence) elephant, Joe, ate a red apple happily."
+            //var textTest = "A \(silence) humongous \(silence) elephant,\(silence) Joe,\(silence)ate \(silence) a \(silence) red \(silence) apple \(silence) happily."
+        var textTest = "Now,\(silence)cancel!"
+            mySynth.startSpeaking(textTest, to: audioURL)
+
             for page in doc.PDFPages {
                 for line in page.pageLines {
                     for word in line.lineWords {
-                            audioPath = normalDir + "\(pageNum)_\(wordNum).aiff"
+                            audioPath = normalDir + "\(pageNum)_" + modifyDigits(num: wordNum) + "\(wordNum).aiff"
+                            self.addrArray.append("\(pageNum)_" + modifyDigits(num: wordNum) + "\(wordNum)")
                             audioURL = URL(fileURLWithPath: audioPath)
                             self.mySynth.rate = 220.0
-                            var bool = self.mySynth.startSpeaking(word.wordString, to: audioURL)
-                            if word.wordString != "" {
+                            var bool = self.mySynth.startSpeaking(word.wordString.lowercased(), to: audioURL)
+                        debugPrint("word \(wordNum) spoken")
+                        if word.wordString != "" {
                             wordNum += 1
                             }
                 }
@@ -197,42 +166,52 @@ class ViewController: NSViewController {
                 wordNum = 1
                 pageNum += 1
             }
-            
-//            audioPath = normalDir + "446.aiff"
-//            audioURL = URL(fileURLWithPath: audioPath)
-//            self.mySynth.rate = 220.0
-//            self.mySynth.startSpeaking("fifty", to: audioURL)
-//            
-//            audioPath = normalDir + "447.aiff"
-//            audioURL = URL(fileURLWithPath: audioPath)
-//            self.mySynth.rate = 220.0
-//            self.mySynth.startSpeaking("or", to: audioURL)
-//            
-//            audioPath = normalDir + "448.aiff"
-//            audioURL = URL(fileURLWithPath: audioPath)
-//            self.mySynth.rate = 220.0
-//            self.mySynth.startSpeaking("sixty", to: audioURL)
+        
 
-
-            
-            //debugPrint("number of words is \(wordcounter)")
-//            for word in doc.NewWordsArray {
-//                audioPath = normalDir + "\(wordNum).aiff"
-//                audioURL = URL(fileURLWithPath: audioPath)
-//                self.mySynth.rate = 220.0
-//                debugPrint(doc.NewWordsArray[wordNum-1])
-//                var bool = self.mySynth.startSpeaking(word, to: audioURL)
-//                if !bool {
-//                debugPrint(wordNum)
-//                debugPrint(doc.NewWordsArray[wordNum-1])
-//                }
-//            wordNum += 1
-//            }
-            
-//        readerDB?.close() //Finished with the database.
-//        }
+        self.durationsArray = self.runShell("/Users/NiloofarZarei/Desktop/getDurations.sh", normalDir)
+        doc.writeDataToFile(ParentDir: parentDir, documentName: "\(documentName)", durationArray: self.durationsArray, addrArray: self.addrArray)
         NSApplication.shared().mainWindow?.endSheet(alert.window)
 }
+    
+    func runShell(_ args: String, _ audioDir: String) -> [String]{
+        var output : [String] = []
+        let task = Process()
+        task.launchPath = "/bin/sh"
+        task.arguments = [args,"-a", audioDir]
+        let pipe = Pipe()
+        task.standardOutput = pipe
+        task.launch()
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        //let outdata = outpipe.fileHandleForReading.readDataToEndOfFile()
+        if var string = String(data: data, encoding: .utf8) {
+            string = string.trimmingCharacters(in: .newlines)
+            output = string.components(separatedBy: "\n")
+        }
+        task.waitUntilExit()
+        //debugPrint(output)
+        return output
+    }
+    
+    func modifyDigits(num: Int) -> String{
+        var digits = 0
+        var num = num
+        while num > 0 {
+            digits += 1
+            num = num / 10
+        }
+        switch digits {
+        case 1:
+            return "000\(num)"
+        case 2:
+            return "00\(num)"
+        case 3:
+            return "0\(num)"
+        default:
+            return "\(num)"
+        }
+    }
+    
+    
 }
 
 
